@@ -100,7 +100,9 @@ public class Test {
         ListAccountsResponse response = accountsList.execute();
         List accounts = response.getAccounts();
         
-        /*
+        /*  
+         * 还没有通过google邮件验证，要等2周
+         * return:
         {
         	  "code" : 403,
         	  "errors" : [ {
