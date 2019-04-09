@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>google-api-reviews</module>
+  	<module>google-api-auth</module>
   </modules>
 </project>
