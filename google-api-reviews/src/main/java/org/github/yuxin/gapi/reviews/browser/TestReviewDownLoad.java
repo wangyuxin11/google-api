@@ -3,19 +3,14 @@ package org.github.yuxin.gapi.reviews.browser;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-
-
-public class Test {
-
+public class TestReviewDownLoad {
 
 	private static String googleReviewUrl = "https://play.google.com/apps/publish/reviews?account=5416627767168703904";
 	
 	private static  GoogleSession googleSession;
-	
 	
 	/**
 	private static String google_context_json = 
