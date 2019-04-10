@@ -1,4 +1,4 @@
-package org.github.yuxin.gapi.reviews;
+package org.github.yuxin.gapi.reviews.browser;
 
 import java.util.List;
 import java.util.Map;

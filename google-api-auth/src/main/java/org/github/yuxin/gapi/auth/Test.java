@@ -1,6 +1,10 @@
 package org.github.yuxin.gapi.auth;
 
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collections;
+
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -8,18 +12,11 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
-
 import com.google.api.services.mybusiness.v4.MyBusiness;
-import com.google.api.services.mybusiness.v4.model.ListAccountsResponse;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import java.util.Collections;
-import java.util.List;
+import com.google.api.services.mybusiness.v4.model.ListAttributeMetadataResponse;
 
 
 
@@ -53,25 +50,26 @@ public class Test {
      * @return AuthorizationCodeInstalledApp
      */
     private static Credential authorize() throws Exception {
+    	
         // Creates an InputStream to hold the client ID and secret.
-        InputStream secrets = Test.class.getResourceAsStream("/client_secret.json");
+        InputStream secrets = Test.class.getResourceAsStream("/client_secret_gpfeedbackmi_other_client.json");
 
         // Prompts the user if no credential is found.
         if (secrets == null) {
             System.out.println(
                 "Enter Client ID and Secret from Google API Console "
-                    + "into google-my-business-api-sample/src/main/resources/client_secrets.json");
+                    + "into google-my-business-api-sample/src/main/resources/client_secret_gpfeedbackmi_other_client.json");
             System.exit(1);
         }
 
         // Uses the InputStream to create an instance of GoogleClientSecrets.
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-            new InputStreamReader(secrets));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(secrets));
+        
         if (clientSecrets.getDetails().getClientId().startsWith("Enter")
             || clientSecrets.getDetails().getClientSecret().startsWith("Enter ")) {
             System.out.println(
                 "Enter Client ID and Secret from Google API Console "
-                    + "into google-my-business-api-sample/src/main/resources/client_secrets.json");
+                    + "into google-my-business-api-sample/src/main/resources/client_secret_gpfeedbackmi_other_client.json");
             System.exit(1);
         }
 
@@ -94,11 +92,25 @@ public class Test {
         // Calls MyBusiness.Builder to create a new instance named 'mybusiness'.
         mybusiness = new MyBusiness.Builder(httpTransport, JSON_FACTORY, credential)
             .setApplicationName(APPLICATION_NAME).build();
+        
+        
+        
+        System.out.println(mybusiness.getApplicationName());
+        
+        ListAttributeMetadataResponse resp = mybusiness.attributes().list().execute();
+        
+        resp.getAttributes();
 
-        // Uses the 'mybusiness' instance to send an API call.
-        MyBusiness.Accounts.List accountsList = mybusiness.accounts().list();
-        ListAccountsResponse response = accountsList.execute();
-        List accounts = response.getAccounts();
+//        // Uses the 'mybusiness' instance to send an API call.
+//        MyBusiness.Accounts.List accountsList = mybusiness.accounts().list();
+//        ListAccountsResponse response = accountsList.execute();
+//        List accounts = response.getAccounts();
+//        
+        
+        
+        //401 Unauthorized
+        
+        
         
         /*  
          * 还没有通过google邮件验证，要等2周
