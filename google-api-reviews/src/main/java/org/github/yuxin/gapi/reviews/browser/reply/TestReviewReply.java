@@ -6,15 +6,19 @@ import java.util.Map;
 import org.github.yuxin.gapi.reviews.browser.GoogleSession;
 import org.github.yuxin.gapi.reviews.browser.WebUtils;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 
+/**
+ * GP回复 Demo, F12看需要的参数 、、todo位置
+ * 
+ * 
+ * 
+ */
 public class TestReviewReply {
 
 	static final String packageName = "com.michatapp.im";
 	
-	private static String googleReviewUrl = "";
+	private static String general_request_url = "";  //TODO googleReviewUrl
 	
 	private static  GoogleSession googleSession;
 	
@@ -38,38 +42,38 @@ public class TestReviewReply {
 		headersMap.put("content-type", "application/javascript; charset=UTF-8");
 //		headersMap.put("cookie", "");
 		headersMap.put("origin", "https://play.google.com");
-		headersMap.put("referer", "");
-		headersMap.put("user-agent", "");
+		headersMap.put("referer", "".trim());  //TODO
+		headersMap.put("user-agent", "".trim()); //TODO
 //		headersMap.put("x-client-data", "");
-		headersMap.put("x-gwt-module-base", "");
-		headersMap.put("x-gwt-permutation", "");
+		headersMap.put("x-gwt-module-base", "".trim());  //TODO
+		headersMap.put("x-gwt-permutation", "".trim());  //TODO
 		
 		googleSession.setHeaders(headersMap);
 		
 
 		Map<String,String> cookiesMap = new HashMap<String, String>();
-		cookiesMap.put("_ga", "");
-		cookiesMap.put("_gid", "");
-		cookiesMap.put("_gid", "");
-		cookiesMap.put("_ga", "");
-		cookiesMap.put("OTZ", "");
-		cookiesMap.put("ANID", "");
-		cookiesMap.put("HSID", "");
-		cookiesMap.put("SSID", "");
-		cookiesMap.put("APISID", "");
-		cookiesMap.put("SAPISID", "");
-		cookiesMap.put("SID", "");
-		cookiesMap.put("PLAY_ACTIVE_ACCOUNT", "");
-		cookiesMap.put("SIDCC", "");
-		cookiesMap.put("1P_JAR", "");
-		cookiesMap.put("CONSENT", "");
-		cookiesMap.put("enabledapps.uploader", "");
+		cookiesMap.put("_ga", "".trim());      //TODO
+		cookiesMap.put("_gid", "".trim());   //TODO
+		cookiesMap.put("_gid", "".trim());   //TODO
+		cookiesMap.put("_ga", "".trim());   //TODO
+		cookiesMap.put("OTZ", "".trim());   //TODO
+		cookiesMap.put("ANID", "".trim());   //TODO
+		cookiesMap.put("HSID", "".trim());   //TODO
+		cookiesMap.put("SSID", "".trim());   //TODO
+		cookiesMap.put("APISID", "".trim());   //TODO
+		cookiesMap.put("SAPISID", "".trim());   //TODO
+		cookiesMap.put("SID", "".trim());   //TODO
+		cookiesMap.put("PLAY_ACTIVE_ACCOUNT", "".trim());   //TODO
+		cookiesMap.put("SIDCC", "".trim());   //TODO
+		cookiesMap.put("1P_JAR", "".trim());   //TODO
+		cookiesMap.put("CONSENT", "".trim());   //TODO
+		cookiesMap.put("enabledapps.uploader", "".trim());   //TODO
 		
 		googleSession.setCookies(cookiesMap);
 		
 		
 		//获取 xsrf
-		XSRF = "";
+		XSRF = "".trim();   //TODO
 		
 		System.out.println("google xsrf :  " + XSRF);
 		
@@ -83,8 +87,8 @@ public class TestReviewReply {
 //		reviewService.sendReply(r.getReviewId(), r.getContent())
 		
 		
-		String reviewId = "";
-		String replyText = "";
+		String reviewId = "";     //TODO  comment_id 唯一ID
+		String replyText = "";     //TODO  回复语
 		
 		GPReplyRequest req = new GPReplyRequest();
 		req.setParams(new GPReplyRequestParam());
@@ -102,19 +106,21 @@ public class TestReviewReply {
 
 		try {
 			String resultJson = WebUtils.PostJson(
-					googleReviewUrl,
+					general_request_url,
 					30*000,
 					json,
 					googleSession.getHeaders(),
 					googleSession.getCookies());
 			
 			System.out.println(resultJson);
-			
-			//{"result":{"1":{"1":"tks","3":"1554897372577"},"2":true,"3":1},"xsrf":"AMtNNDEbWCIQLej0_llZvpRk1IaAAxiViw:1554897372978"}
-			//{"result":{"1":{"1":"tks","3":"1554898825654"},"2":true,"3":1},"xsrf":"AMtNNDHepsyVlwyVJvB2IiZgKz0bXDfnfA:1554898826071"}
+			/**
+			 * resultJson 返回信息格式
+			 * 		{"result":{"1":{"1":"tks","3":"1554897372577"},"2":true,"3":1},"xsrf":"AMtNNDEbWCIQLej0_llZvpRk1IaAAxiViw:1554897372978"}
+			 * 		{"result":{"1":{"1":"tks","3":"1554898825654"},"2":true,"3":1},"xsrf":"AMtNNDHepsyVlwyVJvB2IiZgKz0bXDfnfA:1554898826071"}
+			 * 
+			 */
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
