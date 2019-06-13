@@ -16,7 +16,7 @@ import com.google.gson.Gson;
  */
 public class TestReviewReply {
 
-	static final String packageName = "com.michatapp.im";
+	static final String packageName = "com.myapp.im";
 	
 	private static String general_request_url = "";  //TODO googleReviewUrl
 	
